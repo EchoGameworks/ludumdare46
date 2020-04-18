@@ -187,26 +187,31 @@ public class CameraControl : MonoBehaviour
             newPosition += transform.right * -movementSpeed;
         }
 
-        if (Input.GetKey(KeyCode.Q))
-        {
-            newRotation *= Quaternion.Euler(Vector3.up * rotationAmount * rotateKeyboardSensitivity);
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount * rotateKeyboardSensitivity);
-        }
+        //if (Input.GetKey(KeyCode.Q))
+        //{
+        //    newRotation *= Quaternion.Euler(Vector3.up * rotationAmount * rotateKeyboardSensitivity);
+        //}
+        //if (Input.GetKey(KeyCode.E))
+        //{
+        //    newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount * rotateKeyboardSensitivity);
+        //}
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.Q))
         {
             newZoom += zoomAmount;
         }
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.E))
         {
             newZoom -= zoomAmount;
         }
 
-        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
+        Vector3 finalPosition = new Vector3(Mathf.Clamp(newPosition.x, -65, 220f), Mathf.Clamp(newPosition.y, -400f, 808f), Mathf.Clamp(newPosition.z, -350f, 650f));
+        newPosition = finalPosition;
+        transform.position = Vector3.Lerp(transform.position, finalPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
+
+        Vector3 finalZoom = new Vector3(newZoom.x, Mathf.Clamp(newZoom.y, -40f, 80f), newZoom.z);
+        newZoom.y = finalZoom.y;
+        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, finalZoom, Time.deltaTime * movementTime);
     }
 }

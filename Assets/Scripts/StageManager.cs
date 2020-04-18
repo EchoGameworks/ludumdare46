@@ -28,7 +28,7 @@ public class StageManager : MonoBehaviour
             //Selectable Objects
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, SelectableLayer))
             {
-                print(hit.transform.name);
+                //print(hit.transform.name);
                 SetSelectedUnit(hit.transform.gameObject);
                 return;
             }
@@ -44,9 +44,11 @@ public class StageManager : MonoBehaviour
 
     public void Move(Vector3 location)
     {
-        SelectableBase sb = SelectedUnit.GetComponent<SelectableBase>();
+        if (SelectedUnit == null) return;
+        CharacterBase sb = SelectedUnit.GetComponent<CharacterBase>();
         if (sb != null)
         {
+
             sb.Move(location);
         }
         else
