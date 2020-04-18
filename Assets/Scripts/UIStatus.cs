@@ -34,6 +34,7 @@ public class UIStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (characterBase == null) return;
         this.transform.eulerAngles = PointRotation;
         if(freezeLag > 0)
         {

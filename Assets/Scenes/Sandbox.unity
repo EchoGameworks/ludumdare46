@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 320077515}
   - component: {fileID: 320077516}
   - component: {fileID: 320077514}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,6 +807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackArea: {fileID: 407842098}
+  AttackCollider: {fileID: 320077516}
 --- !u!4 &320077515
 Transform:
   m_ObjectHideFlags: 0
@@ -847,7 +848,7 @@ GameObject:
   - component: {fileID: 334023733}
   - component: {fileID: 334023734}
   - component: {fileID: 334023735}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -896,6 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackArea: {fileID: 816497501}
+  AttackCollider: {fileID: 334023734}
 --- !u!1 &361011155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 407842100}
   - component: {fileID: 407842099}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 816497502}
   - component: {fileID: 816497503}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2044,8 +2046,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlayerMovable: 1
-  uiStatus: {fileID: 0}
-  uiAttackArea: {fileID: 0}
+  uiStatus: {fileID: 1562025387}
+  uiAttackArea: {fileID: 334023735}
   HealthMaxGlobal: 200
   CharacterName: Genesis
   Description: An ancient treant with ability to grow healing fruit. Genesis moves
@@ -2060,8 +2062,9 @@ MonoBehaviour:
   AttackDamage: 1
   AttackDistance: 1
   TurnSpeed: 180
+  AttackTarget: {fileID: 0}
   nma: {fileID: 0}
-  HeroType: 0
+  HeroType: 4
 --- !u!4 &939734267
 Transform:
   m_ObjectHideFlags: 0
@@ -2938,12 +2941,14 @@ MonoBehaviour:
   AttackDamage: 4
   AttackDistance: 0
   TurnSpeed: 0
+  AttackTarget: {fileID: 0}
   nma: {fileID: 0}
   HeroThirst: 0
   CurrentStrategy: 0
   CaravanLM:
     serializedVersion: 2
     m_Bits: 256
+  ScoutTimer: 0
 --- !u!4 &1507557985
 Transform:
   m_ObjectHideFlags: 0

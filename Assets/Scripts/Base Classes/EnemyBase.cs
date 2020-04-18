@@ -13,22 +13,53 @@ public class EnemyBase : CharacterBase
     public HeroTypes HeroThirst;
     public AttackStrategy CurrentStrategy;
     public LayerMask CaravanLM;
+       
+
+
+    private float ScoutTimerMax = 2f;
+    [Header("Enemy Runtime")]
+    public float ScoutTimer;
 
     protected override void Start()
     {
         base.Start();
     }
 
+    private void Update()
+    {
+        if(ScoutTimer > 0f)
+        {
+            ScoutTimer -= Time.deltaTime;
+        }
+        else if(AttackTarget == null)
+        {
+            ScoutTimer = ScoutTimerMax;
+            AttackTarget = Scout();
+        }
+
+        if(AttackTarget != null)
+        {
+            Pursue();
+        }
+    }
+
+
     public HeroBase Scout()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 40f, CaravanLM);
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1000f, CaravanLM);
+       
         List<HeroBase> heroes = new List<HeroBase>();
         foreach(Collider c in hitColliders)
         {
             HeroBase hb = c.GetComponent<HeroBase>();
             if(hb != null)
             {
-                heroes.Add(hb);
+                
+                if (hb.HealthCurrent > 0f)
+                {
+                    
+                    heroes.Add(hb);
+                }               
             }
         }
         HeroBase target = null;
@@ -56,7 +87,7 @@ public class EnemyBase : CharacterBase
                 break;
         }
 
-        print("Scount found:" + target.CharacterName);
+        if(target != null) print("Scount found:" + target.CharacterName);
         return target;
 
     }

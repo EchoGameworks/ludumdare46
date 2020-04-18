@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,11 +22,14 @@ public class CharacterBase : SelectableBase
     public float HealthMax = 200f;
     public float HealthCurrent;
     public float AttackTimeMax;
-    public float AttackTimeCurrent;
     public float MoveSpeedMax = 3.5f;
     public float AttackDamage = 1f;
     public float AttackDistance = 1f;
     public float TurnSpeed = 160f;
+
+    [Header("General Runtime")]
+    public CharacterBase AttackTarget;
+    public float AttackTimeCurrent;
 
     [HideInInspector]
     public NavMeshAgent nma;
@@ -57,6 +61,39 @@ public class CharacterBase : SelectableBase
         }
     }
 
+    public void Pursue()
+    {
+        CharacterBase targetClose = uiAttackArea.AttackableCharacters.Where(o => o == AttackTarget).FirstOrDefault();
+        if (targetClose)
+        {
+            PrepareAttack();
+        }
+    }
+
+    public void PrepareAttack()
+    {
+        if(AttackTimeCurrent > 0)
+        {
+            AttackTimeCurrent -= Time.deltaTime;
+        }
+        else
+        {
+            AttackTimeCurrent = AttackTimeMax;
+            Attack(AttackTarget);
+        }
+    }
+
+    public void Attack(CharacterBase target)
+    {
+        //attack effect
+        target.TakeDamage(AttackDamage);
+        if(target.HealthCurrent < 0)
+        {
+            AttackTarget = null;
+        }
+
+    }
+
     public void TakeDamage(float dmg)
     {
         HealthCurrent -= dmg;
@@ -69,16 +106,12 @@ public class CharacterBase : SelectableBase
         uiStatus.TakeTemporaryDamage();
     }
 
-    public void Attack(CharacterBase target)
-    {
-        //attack effect
-        target.TakeDamage(AttackDamage);
-    }
-
     protected virtual void Die()
     {
         //die effect
     }
+
+
 
 
     public void Move(Vector3 location)
