@@ -10,7 +10,8 @@ public class AudioManager : MonoBehaviour
                                 DeathStinger_Spawn, DeathStinger_Attack, DeathStinger_Death,
                                 Ravager_Spawn, Ravager_Attack, Ravager_Death,
                                 SandHunter_Spawn, SandHunter_Attack, SandHunter_Death,
-                                StartGame, Water, Revive
+                                StartGame, Water, Revive,
+                                None
     }
 
     public static AudioManager instance;
@@ -47,6 +48,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(SoundEffects soundEffect, bool varyPitch = true)
     {
+        if (soundEffect == SoundEffects.None) return;
         Sound s = Sounds.FirstOrDefault(o => o.SoundName == soundEffect);
         if (s == null) return;
         s.source.volume = MasterSFXVolume * s.Volume;
@@ -56,7 +58,7 @@ public class AudioManager : MonoBehaviour
             tempPitch = Random.Range(0.5f, 1.5f);
         }
         s.source.pitch = s.Pitch;
-        print("playing: " + soundEffect + " at " + s.source.volume + " (" + MasterSFXVolume + " | " + s.Volume + ")");
+        //print("playing: " + soundEffect + " at " + s.source.volume + " (" + MasterSFXVolume + " | " + s.Volume + ")");
         s.source.Play();
     }  
 

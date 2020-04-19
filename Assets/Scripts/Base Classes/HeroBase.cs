@@ -11,10 +11,12 @@ public class HeroBase : CharacterBase
     public HeroTypes HeroType;
     public Vector3 StartingPosition;
 
+    private StageManager stageManager;
 
     protected override void Start()
     {
         base.Start();
+        stageManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<StageManager>();
     }
 
     private void Update()
@@ -37,18 +39,38 @@ public class HeroBase : CharacterBase
         foreach(CharacterBase cb in uiAttackArea.AttackableCharacters)
         {
             EnemyBase eb = cb.GetComponent<EnemyBase>();
-            enemies.Add(eb);
+            if (eb != null)
+            {
+                enemies.Add(eb);
+            }
+
+            
+        }
+        if(enemies != null) 
+        {
+            if(enemies.Count > 0)
+            {
+                target = enemies.OrderBy(t => (t.transform.position - this.transform.position).sqrMagnitude)
+                .FirstOrDefault();
+            }
+            //else
+            //{
+            //    target = enemies[0];
+            //}
         }
 
-        target = enemies.OrderBy(t => (t.transform.position - this.transform.position).sqrMagnitude)
-            .FirstOrDefault();
 
         return target;
     }
 
     public override void Die()
     {
-        LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+        base.Die();
+
+        if (HeroType == HeroTypes.Tree) stageManager.Defeat();
+        //Add Alert and Soundeffect
+
+        //LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
     }
 
     public override void Move(Vector3 location)

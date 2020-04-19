@@ -14,6 +14,8 @@ public class UIStatus : MonoBehaviour
     public TextMeshProUGUI HeaderText;
 
     public Image SicknessIcon;
+    public Image FillBackground;
+    private Color fillColorStart;
 
     public float freezeLag;
 
@@ -26,6 +28,7 @@ public class UIStatus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fillColorStart = FillBackground.color;
         HeaderShowScale = new Vector3(0.7f, 0.7f, 0.7f);
         HeaderHideScale = new Vector3(0f, 0.7f, 0.7f);
         Header.transform.localScale = HeaderHideScale;
@@ -104,5 +107,13 @@ public class UIStatus : MonoBehaviour
         //HealthBarMax.fillAmount = characterBase.HealthMax / characterBase.HealthMax;
         HealthBarCurrent.fillAmount = characterBase.HealthCurrent / characterBase.HealthMax;
         HealthBarLag.fillAmount = characterBase.HealthCurrent / characterBase.HealthMax;
+    }
+
+    public void AttackFlash(Color flashColor)
+    {
+        LeanTween.value(gameObject, fillColorStart, flashColor, 0.5f)
+            .setOnUpdateColor((Color c) => FillBackground.color = c)
+            .setEaseInOutCubic()
+            .setLoopPingPong(1);
     }
 }

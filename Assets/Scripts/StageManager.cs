@@ -7,10 +7,13 @@ public class StageManager : MonoBehaviour
     public GameObject SelectedUnit;
     public Camera cam;
     public LayerMask SelectableLayer;
+    public bool FirstStart = true;
+
+    public Transform CameraResetPosition;
 
     void Start()
     {
-
+        FirstStart = true;
     }
 
     void Update()
@@ -57,6 +60,26 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    public void SelectGenesis()
+    {
+        if (!FirstStart) return;
+        LeanTween.delayedCall(0.5f, SelectGenesisFinal);
+    }
+
+    public void SelectGenesisFinal()
+    {
+        GameObject[] GOs = GameObject.FindGameObjectsWithTag("Caravan");
+        foreach (GameObject go in GOs)
+        {
+            HeroBase hb = go.GetComponent<HeroBase>();
+            if (hb.HeroType == HeroBase.HeroTypes.Tree)
+            {
+                SetSelectedUnit(go);
+                FirstStart = false;
+            }
+        }
+    }
+
     public void SetSelectedUnit(GameObject go)
     {
         SelectableBase sb = go.GetComponent<SelectableBase>();
@@ -86,5 +109,11 @@ public class StageManager : MonoBehaviour
             Debug.LogWarning("No Selectable Base Available on Deselect");
         }
         SelectedUnit = null;
+    }
+
+    public void Defeat()
+    {
+        SelectedUnit = null;
+        LeanTween.move(cam.gameObject, CameraResetPosition.position, 1f).setEaseInOutQuad();
     }
 }

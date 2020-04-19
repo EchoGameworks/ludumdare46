@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static AudioManager;
 using static HeroBase;
 
 public class EnemyBase : CharacterBase
@@ -13,8 +14,6 @@ public class EnemyBase : CharacterBase
     public HeroTypes HeroThirst;
     public AttackStrategy CurrentStrategy;
     public LayerMask CaravanLM;
-       
-
 
     private float ScoutTimerMax = 2f;
     [Header("Enemy Runtime")]
@@ -27,6 +26,7 @@ public class EnemyBase : CharacterBase
 
     private void Update()
     {
+        CharacterBase newTarget = null;
         if(ScoutTimer > 0f)
         {
             ScoutTimer -= Time.deltaTime;
@@ -34,11 +34,18 @@ public class EnemyBase : CharacterBase
         else if(AttackTarget == null)
         {
             ScoutTimer = ScoutTimerMax;
-            AttackTarget = Scout();
+
+            newTarget = Scout();
         }
 
-        if(AttackTarget != null)
+        if(newTarget != null)
         {
+            if(newTarget != AttackTarget)
+            {
+                AttackTarget = newTarget;
+                AudioManager.instance.PlaySound(spawnSound);
+            }
+
             Pursue();
         }
     }
@@ -46,7 +53,7 @@ public class EnemyBase : CharacterBase
 
     public HeroBase Scout()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1000f, CaravanLM);
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5000f, CaravanLM);
        
         List<HeroBase> heroes = new List<HeroBase>();
         foreach(Collider c in hitColliders)

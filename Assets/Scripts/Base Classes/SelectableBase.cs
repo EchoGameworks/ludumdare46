@@ -19,7 +19,7 @@ public class SelectableBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+        uiOverlay = GameObject.FindGameObjectWithTag("UI").GetComponent<UIOverlay>();
         SelectableLayer = LayerMask.NameToLayer("Selectable");
         SelectedLayer = LayerMask.NameToLayer("Selected");
     }
