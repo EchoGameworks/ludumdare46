@@ -53,10 +53,10 @@ public class AudioManager : MonoBehaviour
         float tempPitch = s.Pitch;
         if (varyPitch)
         {
-            tempPitch = Random.Range(0.8f, 1.2f);
+            tempPitch = Random.Range(0.5f, 1.5f);
         }
         s.source.pitch = s.Pitch;
-        //print("playing: " + soundEffect + " at " + s.source.volume + " (" + MasterSFXVolume + " | " + s.Volume + ")");
+        print("playing: " + soundEffect + " at " + s.source.volume + " (" + MasterSFXVolume + " | " + s.Volume + ")");
         s.source.Play();
     }  
 

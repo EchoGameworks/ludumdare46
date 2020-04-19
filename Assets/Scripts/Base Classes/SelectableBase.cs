@@ -29,6 +29,7 @@ public class SelectableBase : MonoBehaviour
         //print("Selected - " + gameObject.name);
         if(uiStatus != null) uiStatus.ToggleUI(true);
         if (uiAttackArea != null) uiAttackArea.ToggleUI(true);
+        AudioManager.instance.PlaySound(AudioManager.SoundEffects.Select, true);
     }
 
     public void Deselect(bool skipToolTip = false)

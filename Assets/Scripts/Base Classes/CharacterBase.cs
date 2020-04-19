@@ -7,16 +7,21 @@ using UnityEngine.AI;
 public class CharacterBase : SelectableBase
 {
     public enum CharacterStatus { Moving, Attacking }
-    public enum CharacterSickness { Severe, Moderate, Mild, None }
+    public enum CharacterSickness { Severe, Moderate, Mild, Water, None }
 
     [HideInInspector]
     public float HealthMaxGlobal = 200f;
+
+    [Header("Presets")]
+    public Color Blue;
+    public Color Red;
 
     [Header("General Stats")]
     public string CharacterName;
 
     [TextArea(3, 10)]
     public string Description;
+    public string StatusDescription;
     public CharacterStatus StatusCurrent;
     public CharacterSickness SicknessLevel;
     public float HealthMax = 200f;
@@ -64,7 +69,7 @@ public class CharacterBase : SelectableBase
     public override void Select()
     {
         base.Select();
-        if (uiOverlay != null) uiOverlay.SetShowToolTip(CharacterName, Description);
+        if (uiOverlay != null) uiOverlay.SetShowToolTip(CharacterName, Description, StatusDescription);
     }
 
     public void Pursue()
@@ -125,9 +130,38 @@ public class CharacterBase : SelectableBase
     }
 
 
+    public void SetSickness(CharacterSickness sickness)
+    {
+        SicknessLevel = sickness;
+        switch (SicknessLevel)
+        {
+            case CharacterSickness.Mild:
+                uiStatus.SicknessIcon.gameObject.SetActive(true);
+                uiStatus.SicknessIcon.color = new Color(255, 97, 97);
+                StatusDescription = "<size=40%> <color=#00CEFF>" + CharacterName + "</color> is gravely injured.";
+                break;
+            case CharacterSickness.Moderate:
+                uiStatus.SicknessIcon.gameObject.SetActive(true);
+                uiStatus.SicknessIcon.color = new Color(255, 97, 97);
+                StatusDescription = "<size=40%> <color=#00CEFF>" + CharacterName + "</color> is gravely injured.";
+                break;
+            case CharacterSickness.Severe:
+                uiStatus.SicknessIcon.gameObject.SetActive(true);
+                uiStatus.SicknessIcon.color = new Color(255, 97, 97);
+                StatusDescription = "<size=40%> <color=#00CEFF>" + CharacterName + "</color> is gravely injured.";
+                break;
+            case CharacterSickness.Water:
+                uiStatus.SicknessIcon.gameObject.SetActive(true);
+                uiStatus.SicknessIcon.color = Blue; //new Color(206, 255, 255); //aqua
+                StatusDescription = "<size=40%> <color=#00CEFF>Genesis</color> produced a <color=#00CEFF>Magic Fruit</color>. Take it back west to heal an ally. </size>";
+                break;
+            case CharacterSickness.None:
+                uiStatus.SicknessIcon.gameObject.SetActive(false);
+                break;
+        }
+    }
 
-
-    public void Move(Vector3 location)
+    public virtual void Move(Vector3 location)
     {
         if (!IsPlayerMovable) return;
         nma.SetDestination(location);

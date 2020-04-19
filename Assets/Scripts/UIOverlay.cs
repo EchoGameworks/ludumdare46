@@ -27,14 +27,14 @@ public class UIOverlay : MonoBehaviour
         
     }
 
-    public void SetTooltipText(string Title, string Description)
+    public void SetTooltipText(string Title, string Description, string AddInfo)
     {
-        TooltipText.text = Title + "<br><size=60%>" + Description;
+        TooltipText.text = "<color=#00CEFF>" +Title + "</color><br><size=60%>" + Description + "<br>" + AddInfo;
     }
 
-    public void SetShowToolTip(string Title, string Description)
+    public void SetShowToolTip(string Title, string Description, string AddInfo)
     {
-        SetTooltipText(Title, Description);
+        SetTooltipText(Title, Description, AddInfo);
         ShowTooltip();
     }
 

@@ -50,4 +50,15 @@ public class HeroBase : CharacterBase
     {
         LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
     }
+
+    public override void Move(Vector3 location)
+    {
+        base.Move(location);
+        if(location != nma.steeringTarget)
+        {
+            print("sounding");
+            AudioManager.instance.PlaySound(AudioManager.SoundEffects.Order);
+        }
+        
+    }
 }

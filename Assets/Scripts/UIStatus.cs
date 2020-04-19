@@ -13,6 +13,8 @@ public class UIStatus : MonoBehaviour
     public Image HealthBarLag;
     public TextMeshProUGUI HeaderText;
 
+    public Image SicknessIcon;
+
     public float freezeLag;
 
     private CharacterBase characterBase;

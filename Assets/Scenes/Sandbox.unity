@@ -1777,83 +1777,83 @@ MonoBehaviour:
   Sounds:
   - SoundName: 0
     Clip: {fileID: 8300000, guid: 9e27bda4f59fa1d44a9915ec76f94fe2, type: 3}
-    Volume: 0.516
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 1
     Clip: {fileID: 8300000, guid: cf386d1d4e1c9db40b65fd6eca43c06b, type: 3}
-    Volume: 0
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 2
     Clip: {fileID: 8300000, guid: eb253fce9f29a2d4caff3caf8bdda642, type: 3}
-    Volume: 0.485
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 3
     Clip: {fileID: 8300000, guid: d392a8d61a6a3fa4ca318388aa2db6b3, type: 3}
-    Volume: 0.521
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 4
     Clip: {fileID: 8300000, guid: 335e3c102bd14374eb704e5448d9b897, type: 3}
-    Volume: 0.501
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 5
     Clip: {fileID: 8300000, guid: fa35063cb41fc974694e3451adea9028, type: 3}
-    Volume: 0.495
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 6
     Clip: {fileID: 8300000, guid: ee04d3ae07219e344954dbbf63e477fd, type: 3}
-    Volume: 0.443
-    Pitch: 1.021
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 7
     Clip: {fileID: 8300000, guid: 252e5cdc0c539eb4e9657ed36924bd18, type: 3}
-    Volume: 0
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 8
     Clip: {fileID: 8300000, guid: c3fc5ddd3d9541448b1af99caaeb5019, type: 3}
-    Volume: 0.459
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 9
     Clip: {fileID: 8300000, guid: 16e862fd17291a649814ad640947e9e7, type: 3}
-    Volume: 0.412
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 10
     Clip: {fileID: 0}
-    Volume: 0.501
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 11
     Clip: {fileID: 8300000, guid: 2e7b2f5fc34d44f4ab2045fd3b01b9ce, type: 3}
-    Volume: 0.459
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 12
     Clip: {fileID: 8300000, guid: 4b49166fa6fdb0044967d92ad9194123, type: 3}
-    Volume: 0.48
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 13
     Clip: {fileID: 8300000, guid: c3c5529696b789f43aba34af6f437032, type: 3}
     Volume: 1
-    Pitch: 0
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 14
     Clip: {fileID: 8300000, guid: f62448381306cbe479a7e324553ad15b, type: 3}
-    Volume: 0.501
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
   - SoundName: 15
     Clip: {fileID: 8300000, guid: 401886c55e1ba924ebf8cdd8ed2dbbfe, type: 3}
-    Volume: 0.35
-    Pitch: 0
+    Volume: 1
+    Pitch: 1
     source: {fileID: 0}
 --- !u!114 &361011160
 MonoBehaviour:
@@ -2143,8 +2143,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.5, y: -0.7}
-  m_SizeDelta: {x: 545.2, y: 148.7}
+  m_AnchoredPosition: {x: 1, y: -0.7}
+  m_SizeDelta: {x: 599.7, y: 148.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &402038531
 MonoBehaviour:
@@ -4189,15 +4189,18 @@ MonoBehaviour:
   uiAttackArea: {fileID: 334023735}
   uiOverlay: {fileID: 655492727}
   HealthMaxGlobal: 200
+  Blue: {r: 0, g: 0.8072343, b: 1, a: 1}
+  Red: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
   CharacterName: Genesis
   Description: An ancient treant with ability to grow healing fruit. Genesis moves
     slowly and has no attacks. If Genesis dies, all hope is lost.
+  StatusDescription: 
   StatusCurrent: 0
   SicknessLevel: 3
   HealthMax: 200
   HealthCurrent: 0
   AttackTimeMax: 0
-  MoveSpeedMax: 3.5
+  MoveSpeedMax: 6
   AttackDamage: 1
   AttackDistance: 1
   TurnSpeed: 280
@@ -4214,7 +4217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939734263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.1, y: 4.4, z: -304.2}
+  m_LocalPosition: {x: -11.5, y: 4.4, z: 512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1562025383}
@@ -4578,6 +4581,7 @@ MonoBehaviour:
   HealthBarCurrent: {fileID: 1336214792}
   HealthBarLag: {fileID: 2116105950}
   HeaderText: {fileID: 1884581575}
+  SicknessIcon: {fileID: 0}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!224 &1010329257 stripped
@@ -4735,7 +4739,7 @@ MonoBehaviour:
     Well</color> to produce the <color=#00CEFF>Magic Fruit</color>\n      - Bring
     the <color=#00CEFF>Magic Fruit</color> back to the village to heal another hero
     who will join your cause\n      - Repeat this process until all the remaining
-    heroes have been brought back to life\n      - The game is lost when <color=#00CEFF>Genesis</color>
+    heroes have been brought back to health\n      - The game is lost when <color=#00CEFF>Genesis</color>
     is destroyed\n\n<size=80%>Controls\n<size=60%>\n     - Camera Pan: WASD or Right
     Mouse Button Drag. Hold Shift to pan faster\n     - Camara Zoom: Q and E or Mouse
     Scroll Wheel\n     - Unit Select: Left Mouse Button Click\n     - Move Hero:
@@ -4811,7 +4815,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1053195541}
-    characterCount: 1322
+    characterCount: 1324
     spriteCount: 0
     spaceCount: 311
     wordCount: 229
@@ -5475,6 +5479,7 @@ MonoBehaviour:
   HealthBarCurrent: {fileID: 920860599}
   HealthBarLag: {fileID: 1897442194}
   HeaderText: {fileID: 116628444}
+  SicknessIcon: {fileID: 0}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!1001 &1319869122
@@ -5915,6 +5920,31 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.96, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1354725612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354725610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7349dbafefcb13743b928665806034d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &1354725613
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354725610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.73
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1355243566
 GameObject:
   m_ObjectHideFlags: 0
@@ -6143,7 +6173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1507557981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6212,9 +6242,12 @@ MonoBehaviour:
   uiAttackArea: {fileID: 320077514}
   uiOverlay: {fileID: 655492727}
   HealthMaxGlobal: 200
+  Blue: {r: 0, g: 0, b: 0, a: 0}
+  Red: {r: 0, g: 0, b: 0, a: 0}
   CharacterName: Ravager
   Description: A quick enemy with a bite attack. They normally come in packs and
     will target whoever is closest to them.
+  StatusDescription: 
   StatusCurrent: 0
   SicknessLevel: 3
   HealthMax: 30
@@ -6521,6 +6554,7 @@ MonoBehaviour:
   HealthBarCurrent: {fileID: 1604628903}
   HealthBarLag: {fileID: 1826897970}
   HeaderText: {fileID: 989803604}
+  SicknessIcon: {fileID: 794015052}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!1 &1575482588
@@ -6684,15 +6718,18 @@ MonoBehaviour:
   uiAttackArea: {fileID: 1398929757}
   uiOverlay: {fileID: 655492727}
   HealthMaxGlobal: 200
+  Blue: {r: 0, g: 0.8072343, b: 1, a: 1}
+  Red: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
   CharacterName: Brecht
   Description: The only person left standing in the village. Moderate maximum health
     and a strong, medium range attack.
+  StatusDescription: 
   StatusCurrent: 0
   SicknessLevel: 3
   HealthMax: 100
   HealthCurrent: 0
   AttackTimeMax: 1
-  MoveSpeedMax: 8
+  MoveSpeedMax: 10
   AttackDamage: 5
   AttackDistance: 3
   TurnSpeed: 320
@@ -6740,6 +6777,7 @@ MonoBehaviour:
   HealthBarCurrent: {fileID: 121604865}
   HealthBarLag: {fileID: 2097695633}
   HeaderText: {fileID: 687398305}
+  SicknessIcon: {fileID: 0}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!224 &1592237448 stripped
@@ -6840,7 +6878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1621322402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6909,9 +6947,12 @@ MonoBehaviour:
   uiAttackArea: {fileID: 113708618}
   uiOverlay: {fileID: 655492727}
   HealthMaxGlobal: 200
+  Blue: {r: 0, g: 0, b: 0, a: 0}
+  Red: {r: 0, g: 0, b: 0, a: 0}
   CharacterName: Goblin
   Description: A quick enemy with a bite attack. They normally come in packs and
     will target whoever is closest to them.
+  StatusDescription: 
   StatusCurrent: 0
   SicknessLevel: 3
   HealthMax: 50
