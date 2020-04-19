@@ -11,6 +11,8 @@ public class SelectableBase : MonoBehaviour
     [Header("UI")]
     public UIStatus uiStatus;
     public UIAttackArea uiAttackArea;
+    public UIOverlay uiOverlay;
+
     //public 
     private LayerMask SelectedLayer;
     private LayerMask SelectableLayer;
@@ -22,17 +24,18 @@ public class SelectableBase : MonoBehaviour
         SelectedLayer = LayerMask.NameToLayer("Selected");
     }
 
-    public void Select()
+    public virtual void Select()
     {
         //print("Selected - " + gameObject.name);
         if(uiStatus != null) uiStatus.ToggleUI(true);
         if (uiAttackArea != null) uiAttackArea.ToggleUI(true);
     }
 
-    public void Deselect()
+    public void Deselect(bool skipToolTip = false)
     {
         if (uiStatus != null) uiStatus.ToggleUI(false);
         if (uiAttackArea != null) uiAttackArea.ToggleUI(false);
+        if (uiOverlay != null && !skipToolTip) uiOverlay.HideToolTip();
         //print("Deselected - " + gameObject.name);
 
     }

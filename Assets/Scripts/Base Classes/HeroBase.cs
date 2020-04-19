@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HeroBase : CharacterBase
@@ -8,15 +9,45 @@ public class HeroBase : CharacterBase
 
     [Header("Hero Stats")]
     public HeroTypes HeroType;
+    public Vector3 StartingPosition;
 
-    //void Start()
-    //{
-        
-    //}
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    private void Update()
+    {
+        if(StatusCurrent == CharacterStatus.Attacking)
+        {
+            AttackTarget = Scout();
+        }
+
+        if (AttackTarget != null)
+        {
+            Attack(AttackTarget);
+        }
+    }
+
+    public EnemyBase Scout()
+    {
+        EnemyBase target = null;
+        List<EnemyBase> enemies = new List<EnemyBase>();
+        foreach(CharacterBase cb in uiAttackArea.AttackableCharacters)
+        {
+            EnemyBase eb = cb.GetComponent<EnemyBase>();
+            enemies.Add(eb);
+        }
+
+        target = enemies.OrderBy(t => (t.transform.position - this.transform.position).sqrMagnitude)
+            .FirstOrDefault();
+
+        return target;
+    }
+
+    public override void Die()
+    {
+        LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+    }
 }

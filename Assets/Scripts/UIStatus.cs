@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIStatus : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIStatus : MonoBehaviour
     public Image HealthBarMax;
     public Image HealthBarCurrent;
     public Image HealthBarLag;
+    public TextMeshProUGUI HeaderText;
 
     public float freezeLag;
 
@@ -76,7 +78,7 @@ public class UIStatus : MonoBehaviour
 
     public void SetName(string name)
     {
-
+        HeaderText.text = name;
     }
 
     public void SetHealth(CharacterBase cb)

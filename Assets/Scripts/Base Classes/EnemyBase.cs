@@ -87,7 +87,7 @@ public class EnemyBase : CharacterBase
                 break;
         }
 
-        if(target != null) print("Scount found:" + target.CharacterName);
+        //if(target != null) print("Scount found:" + target.CharacterName);
         return target;
 
     }

@@ -50,15 +50,21 @@ public class CharacterBase : SelectableBase
 
     void Update()
     {
-        if (nma.steeringTarget != null && nma.remainingDistance < 4f)
-        {
-            StatusCurrent = CharacterStatus.Attacking;
-            //print("at target");
-        }
-        else
-        {
-            StatusCurrent = CharacterStatus.Moving;
-        }
+        //if (nma.steeringTarget != null && nma.remainingDistance < 2f)
+        //{
+        //    StatusCurrent = CharacterStatus.Attacking;
+        //    //print("at target");
+        //}
+        //else
+        //{
+        //    StatusCurrent = CharacterStatus.Moving;
+        //}
+    }
+
+    public override void Select()
+    {
+        base.Select();
+        if (uiOverlay != null) uiOverlay.SetShowToolTip(CharacterName, Description);
     }
 
     public void Pursue()
@@ -66,7 +72,14 @@ public class CharacterBase : SelectableBase
         CharacterBase targetClose = uiAttackArea.AttackableCharacters.Where(o => o == AttackTarget).FirstOrDefault();
         if (targetClose)
         {
+            StatusCurrent = CharacterStatus.Attacking;
+            nma.isStopped = true;
             PrepareAttack();
+        }
+        else
+        {
+            StatusCurrent = CharacterStatus.Moving;
+            Move(AttackTarget.transform.position);
         }
     }
 
@@ -106,7 +119,7 @@ public class CharacterBase : SelectableBase
         uiStatus.TakeTemporaryDamage();
     }
 
-    protected virtual void Die()
+    public virtual void Die()
     {
         //die effect
     }
@@ -117,7 +130,6 @@ public class CharacterBase : SelectableBase
     public void Move(Vector3 location)
     {
         if (!IsPlayerMovable) return;
-        print("moving - " + location);
         nma.SetDestination(location);
         StatusCurrent = CharacterStatus.Moving;
     }

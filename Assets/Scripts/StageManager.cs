@@ -62,6 +62,7 @@ public class StageManager : MonoBehaviour
         SelectableBase sb = go.GetComponent<SelectableBase>();
         if (sb != null)
         {
+            if (SelectedUnit != null) SelectedUnit.GetComponent<SelectableBase>().Deselect(true);
             sb.Select();
         }
         else
