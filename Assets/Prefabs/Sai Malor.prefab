@@ -18,7 +18,7 @@ MonoBehaviour:
   HealthBarLag: {fileID: 6506369774314645110}
   HeaderText: {fileID: 6506369774294239664}
   SicknessIcon: {fileID: 6506369773482972028}
-  FillBackground: {fileID: 0}
+  FillBackground: {fileID: 3278388087386343839}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!1 &6506369772625573546
@@ -1368,6 +1368,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6506369774186997616}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3278388087386343839 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8589605077130948335, guid: 6a81b1423b1d2c647828151868215387,
+    type: 3}
+  m_PrefabInstance: {fileID: 6506369774186997616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3278388088265582183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8589605077330690327, guid: 6a81b1423b1d2c647828151868215387,

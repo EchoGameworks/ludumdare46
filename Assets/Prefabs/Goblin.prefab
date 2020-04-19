@@ -18,7 +18,7 @@ MonoBehaviour:
   HealthBarLag: {fileID: 8730179886114747482}
   HeaderText: {fileID: 8730179887551874068}
   SicknessIcon: {fileID: 8730179887200271725}
-  FillBackground: {fileID: 0}
+  FillBackground: {fileID: 1014361139246976261}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!1 &8730179885837514089
@@ -83,7 +83,7 @@ MonoBehaviour:
     will target whoever is closest to them.
   StatusDescription: 
   StatusCurrent: 0
-  SicknessLevel: 3
+  SicknessLevel: 4
   HealthMax: 50
   HealthCurrent: 0
   AttackTimeMax: 4
@@ -1388,15 +1388,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a81b1423b1d2c647828151868215387, type: 3}
---- !u!224 &1014361138508260092 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8589605077330690326, guid: 6a81b1423b1d2c647828151868215387,
-    type: 3}
-  m_PrefabInstance: {fileID: 8730179886323262442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1014361138508260093 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8589605077330690327, guid: 6a81b1423b1d2c647828151868215387,
     type: 3}
   m_PrefabInstance: {fileID: 8730179886323262442}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1014361138508260092 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8589605077330690326, guid: 6a81b1423b1d2c647828151868215387,
+    type: 3}
+  m_PrefabInstance: {fileID: 8730179886323262442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1014361139246976261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8589605077130948335, guid: 6a81b1423b1d2c647828151868215387,
+    type: 3}
+  m_PrefabInstance: {fileID: 8730179886323262442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

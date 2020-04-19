@@ -7,7 +7,7 @@ using static AudioManager;
 
 public class CharacterBase : SelectableBase
 {
-    public enum CharacterStatus { Moving, Attacking, Sick }
+    public enum CharacterStatus { Moving, Attacking, Sick, Idle }
     public enum CharacterSickness { Severe, Moderate, Mild, Water, None }
 
     [HideInInspector]
@@ -117,9 +117,9 @@ public class CharacterBase : SelectableBase
     {
         //attack effect
         target.TakeDamage(AttackDamage);
-        AudioManager.instance.PlaySound(attackSound);
+        AudioManager.instance.PlaySound(attackSound, true);
         uiStatus.AttackFlash(Red);
-        if (target.HealthCurrent < 0)
+        if (target.HealthCurrent <= 0)
         {
             AttackTarget = null;
         }
@@ -141,7 +141,6 @@ public class CharacterBase : SelectableBase
     public virtual void Die()
     {
         AudioManager.instance.PlaySound(deathSound);
-        LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
     }
 
 
@@ -185,7 +184,12 @@ public class CharacterBase : SelectableBase
     public virtual void Move(Vector3 location)
     {
         if (StatusCurrent == CharacterStatus.Sick) return;
-        nma.SetDestination(location);
+        if (nma.isActiveAndEnabled)
+        {
+            nma.isStopped = false;
+            nma.SetDestination(location);
+        }
+
         StatusCurrent = CharacterStatus.Moving;
     }
 

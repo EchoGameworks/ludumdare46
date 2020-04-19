@@ -7,9 +7,10 @@ public class StageManager : MonoBehaviour
     public GameObject SelectedUnit;
     public Camera cam;
     public LayerMask SelectableLayer;
+    public CameraControl cameraControl; 
     public bool FirstStart = true;
-
-    public Transform CameraResetPosition;
+    public UIOverlay uiOverlay;
+    public Transform CharacterHolder;
 
     void Start()
     {
@@ -41,6 +42,19 @@ public class StageManager : MonoBehaviour
             {
                 //print("Ground Select");
                 DeselectUnit();
+            }
+        }
+
+
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            if (SelectedUnit != null)
+            {
+                HeroBase hb = SelectedUnit.GetComponent<HeroBase>();
+                if(hb != null)
+                {
+                    hb.nma.isStopped = true;
+                }
             }
         }
     }
@@ -75,6 +89,8 @@ public class StageManager : MonoBehaviour
             if (hb.HeroType == HeroBase.HeroTypes.Tree)
             {
                 SetSelectedUnit(go);
+                cameraControl.followTransform = go.transform;
+                //LeanTween.move(cam.gameObject, new Vector3(go.transform.position.x, cam.transform.position.y, go.transform.position.z), 0.5f).setEaseInOutQuad();
                 FirstStart = false;
             }
         }
@@ -113,7 +129,16 @@ public class StageManager : MonoBehaviour
 
     public void Defeat()
     {
-        SelectedUnit = null;
-        LeanTween.move(cam.gameObject, CameraResetPosition.position, 1f).setEaseInOutQuad();
+        foreach(Transform t in CharacterHolder)
+        {
+            CharacterBase cb = t.GetComponent<CharacterBase>();
+            if(cb != null)
+            {
+                cb.StatusCurrent = CharacterBase.CharacterStatus.Idle;
+            }
+            
+        }
+        SelectGenesisFinal();
+        LeanTween.delayedCall(1.5f, () => uiOverlay.ShowGameOver());
     }
 }

@@ -578,7 +578,7 @@ MonoBehaviour:
     will target whoever is closest to them.
   StatusDescription: 
   StatusCurrent: 0
-  SicknessLevel: 3
+  SicknessLevel: 4
   HealthMax: 30
   HealthCurrent: 0
   AttackTimeMax: 2
@@ -1287,7 +1287,7 @@ MonoBehaviour:
   HealthBarLag: {fileID: 2916001670804077117}
   HeaderText: {fileID: 2916001670771876388}
   SicknessIcon: {fileID: 2916001669376674918}
-  FillBackground: {fileID: 0}
+  FillBackground: {fileID: 6864559363742922958}
   freezeLag: 0
   PointRotation: {x: 115, y: 90, z: 180}
 --- !u!1001 &2916001670526817825
@@ -1491,6 +1491,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2916001670526817825}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6864559363742922958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8589605077130948335, guid: 6a81b1423b1d2c647828151868215387,
+    type: 3}
+  m_PrefabInstance: {fileID: 2916001670526817825}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6864559364473247543 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8589605077330690326, guid: 6a81b1423b1d2c647828151868215387,

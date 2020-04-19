@@ -15,6 +15,10 @@ public class UIOverlay : MonoBehaviour
     public RectTransform IntroButton;
     public RectTransform IntroUnderline;
 
+    [Header("Gameover Banner")]
+    public RectTransform GameOverBanner;
+    public RectTransform GameOverUnderline;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,10 +108,6 @@ public class UIOverlay : MonoBehaviour
                 IntroUnderline.anchoredPosition = val;
             }
         );
-
-        //LeanTween.moveX(IntroBanner, 260f, 0.3f).setEaseInOutCirc().setDelay(0.3f);
-        //LeanTween.moveX(IntroButton, -500f, 0.3f).setEaseInOutCirc();
-        //LeanTween.moveX(IntroUnderline, 326f, 0.3f).setDelay(0.5f).setEaseInOutCirc();
     }
 
     public void HideIntro()
@@ -138,10 +138,45 @@ public class UIOverlay : MonoBehaviour
                 IntroUnderline.anchoredPosition = val;
             }
         );
+    }
 
+    public void ShowGameOver()
+    {
+        LeanTween.value(GameOverBanner.gameObject, GameOverBanner.anchoredPosition, new Vector2(-663f, GameOverBanner.anchoredPosition.y), 0.3f)
+            .setEaseInOutCubic()
+            .setDelay(0.3f)
+            .setOnUpdate(
+            (Vector2 val) => {
+                GameOverBanner.anchoredPosition = val;
+            }
+        );
+        LeanTween.value(GameOverUnderline.gameObject, GameOverUnderline.anchoredPosition, new Vector2(-325, GameOverUnderline.anchoredPosition.y), 0.3f)
+            .setEaseInOutCubic()
+            .setDelay(0.5f)
+            .setOnUpdate(
+            (Vector2 val) => {
+                GameOverUnderline.anchoredPosition = val;
+            }
+        );
 
-       // LeanTween.moveX(IntroBanner, -540f, 0.3f).setDelay(0.2f).setEaseInOutCirc();
-        //LeanTween.moveX(IntroButton, 60f, 0.3f).setEaseInOutCirc().setDelay(0.4f);
-        //LeanTween.moveX(IntroUnderline, -540f, 0.3f).setEaseInOutCirc();
+    }
+
+    public void HideGameOver()
+    {
+        LeanTween.value(GameOverBanner.gameObject, GameOverBanner.anchoredPosition, new Vector2(260f, GameOverBanner.anchoredPosition.y), 0.3f)
+            .setEaseInOutCubic()
+            .setDelay(0.2f)
+            .setOnUpdate(
+            (Vector2 val) => {
+                GameOverBanner.anchoredPosition = val;
+            }
+        );
+        LeanTween.value(GameOverUnderline.gameObject, GameOverUnderline.anchoredPosition, new Vector2(600f, GameOverUnderline.anchoredPosition.y), 0.3f)
+            .setEaseInOutCubic()
+            .setOnUpdate(
+            (Vector2 val) => {
+                GameOverUnderline.anchoredPosition = val;
+            }
+        );
     }
 }

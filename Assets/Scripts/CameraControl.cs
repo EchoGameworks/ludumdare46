@@ -40,10 +40,12 @@ public class CameraControl : MonoBehaviour
     private Vector3 dragCurrentPosition;
     public float DragThresholdSensitivity = 1f;
 
+    bool tracking;
+
     private void Awake()
     {
         instance = this;
-        
+        tracking = false;
     }
 
     void Start()
@@ -56,7 +58,19 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        if(followTransform == null)
+        if(followTransform != null && !tracking)
+        {
+            tracking = true;
+            LeanTween.move(gameObject, new Vector3(followTransform.position.x + 60f, 75f, followTransform.position.z), 0.9f)
+                .setEaseInOutCirc()
+                .setOnComplete(() => {
+                    newPosition = new Vector3(followTransform.position.x + 60f, 75f, followTransform.position.z);
+                    followTransform = null;
+                    tracking = false;
+                });
+         
+        }
+        else if (followTransform == null)
         {
             HandleMovementInput();
             HandleMouseInput();
@@ -186,6 +200,7 @@ public class CameraControl : MonoBehaviour
         {
             newPosition += transform.right * -movementSpeed;
         }
+
 
         //if (Input.GetKey(KeyCode.Q))
         //{

@@ -67,10 +67,17 @@ public class HeroBase : CharacterBase
     {
         base.Die();
 
-        if (HeroType == HeroTypes.Tree) stageManager.Defeat();
-        //Add Alert and Soundeffect
+        if (HeroType == HeroTypes.Tree)
+        {
+            stageManager.Defeat();
+           // LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+        }
+        else
+        {
+            LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+        }
 
-        //LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+        
     }
 
     public override void Move(Vector3 location)
@@ -78,7 +85,7 @@ public class HeroBase : CharacterBase
         base.Move(location);
         if(location != nma.steeringTarget)
         {
-            print("sounding");
+            //print("sounding");
             AudioManager.instance.PlaySound(AudioManager.SoundEffects.Order);
         }
         

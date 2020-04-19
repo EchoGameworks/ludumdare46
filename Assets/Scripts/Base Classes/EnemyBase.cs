@@ -26,6 +26,8 @@ public class EnemyBase : CharacterBase
 
     private void Update()
     {
+        if (StatusCurrent == CharacterStatus.Idle) return;
+
         CharacterBase newTarget = null;
         if(ScoutTimer > 0f)
         {
@@ -35,17 +37,16 @@ public class EnemyBase : CharacterBase
         {
             ScoutTimer = ScoutTimerMax;
 
-            newTarget = Scout();
-        }
-
-        if(newTarget != null)
-        {
-            if(newTarget != AttackTarget)
+            newTarget = Scout();            
+            if (newTarget != AttackTarget)
             {
-                AttackTarget = newTarget;
                 AudioManager.instance.PlaySound(spawnSound);
             }
+            AttackTarget = newTarget;
+        }
 
+        if(AttackTarget != null)
+        {
             Pursue();
         }
     }
@@ -53,7 +54,7 @@ public class EnemyBase : CharacterBase
 
     public HeroBase Scout()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5000f, CaravanLM);
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 100f, CaravanLM);
        
         List<HeroBase> heroes = new List<HeroBase>();
         foreach(Collider c in hitColliders)
@@ -78,10 +79,6 @@ public class EnemyBase : CharacterBase
                 target = heroes.OrderBy(t => (t.HealthCurrent))
                     .FirstOrDefault();
                 break;
-            case AttackStrategy.Closest:                
-                target = heroes.OrderBy(t => (t.transform.position - this.transform.position).sqrMagnitude)
-                   .FirstOrDefault();
-                break;
             case AttackStrategy.Glory:
                 //Most HP
                 target = heroes.OrderByDescending(t => (t.transform.GetComponent<HeroBase>().HealthCurrent))
@@ -94,13 +91,22 @@ public class EnemyBase : CharacterBase
                 break;
         }
 
+        if(target == null)
+        {             
+            target = heroes.OrderBy(t => (t.transform.position - this.transform.position).sqrMagnitude)
+                .FirstOrDefault();
+        }
         //if(target != null) print("Scount found:" + target.CharacterName);
         return target;
 
     }
 
+    public override void Die()
+    {
+        base.Die();
+        LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+    }
 
- 
 
 
 
