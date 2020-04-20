@@ -19,6 +19,7 @@ public class EnemyBase : CharacterBase
     [Header("Enemy Runtime")]
     public float ScoutTimer;
 
+    private bool isDead = false;
     protected override void Start()
     {
         base.Start();
@@ -54,7 +55,7 @@ public class EnemyBase : CharacterBase
 
     public HeroBase Scout()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 100f, CaravanLM);
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 130f, CaravanLM);
        
         List<HeroBase> heroes = new List<HeroBase>();
         foreach(Collider c in hitColliders)
@@ -63,7 +64,7 @@ public class EnemyBase : CharacterBase
             if(hb != null)
             {
                 
-                if (hb.HealthCurrent > 0f)
+                if (hb.HealthCurrent > 0f && hb.StatusCurrent != CharacterStatus.Sick)
                 {
                     
                     heroes.Add(hb);
@@ -104,7 +105,22 @@ public class EnemyBase : CharacterBase
     public override void Die()
     {
         base.Die();
-        LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+        if (!isDead)
+        {
+            isDead = true;
+            LeanTween.scale(gameObject, Vector3.zero, 0.3f);
+            if (gameObject != null)
+            {
+                LeanTween.delayedCall(0.3f, () => {
+                    if (gameObject != null)
+                    {
+                        Destroy(gameObject);
+                    }
+                });
+            }
+        }
+
+        
     }
 
 

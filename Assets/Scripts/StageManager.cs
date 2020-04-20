@@ -53,6 +53,7 @@ public class StageManager : MonoBehaviour
                 HeroBase hb = SelectedUnit.GetComponent<HeroBase>();
                 if(hb != null)
                 {
+                    //#FIX
                     hb.nma.isStopped = true;
                 }
             }
@@ -139,6 +140,6 @@ public class StageManager : MonoBehaviour
             
         }
         SelectGenesisFinal();
-        LeanTween.delayedCall(1.5f, () => uiOverlay.ShowGameOver());
+        LeanTween.delayedCall(1.5f, () => uiOverlay.ShowGameOver("Game Over", "You Lost. Try again with the button below!"));
     }
 }

@@ -12,6 +12,7 @@ public class UIStatus : MonoBehaviour
     public Image HealthBarCurrent;
     public Image HealthBarLag;
     public TextMeshProUGUI HeaderText;
+    public GameObject ReviveButton;
 
     public Image SicknessIcon;
     public Image FillBackground;
@@ -115,5 +116,17 @@ public class UIStatus : MonoBehaviour
             .setOnUpdateColor((Color c) => FillBackground.color = c)
             .setEaseInOutCubic()
             .setLoopPingPong(1);
+    }
+
+    public void ShowRevive()
+    {   
+        LeanTween.scale(ReviveButton, Vector3.one, 0.3f)
+            .setEaseInOutCubic();
+    }
+    
+    public void HideRevive()
+    {
+        LeanTween.scale(ReviveButton, Vector3.zero, 0.3f)
+            .setEaseInOutCubic();
     }
 }

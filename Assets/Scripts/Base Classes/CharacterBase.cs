@@ -46,10 +46,13 @@ public class CharacterBase : SelectableBase
 
     [HideInInspector]
     public NavMeshAgent nma;
+    //#FIX
 
     protected override void Start()
     {
         base.Start();
+
+        //#FIX
         nma = GetComponent<NavMeshAgent>();
         nma.angularSpeed = TurnSpeed;
         nma.speed = MoveSpeedMax;
@@ -89,6 +92,7 @@ public class CharacterBase : SelectableBase
         if (targetClose)
         {
             StatusCurrent = CharacterStatus.Attacking;
+            //#FIX
             nma.isStopped = true;
             PrepareAttack();
         }
@@ -143,6 +147,62 @@ public class CharacterBase : SelectableBase
         AudioManager.instance.PlaySound(deathSound);
     }
 
+    public void Revive()
+    {
+        StatusCurrent = CharacterStatus.Attacking;
+        SetSickness(CharacterSickness.None);
+        uiStatus.HideRevive();
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Caravan");
+        foreach (GameObject go in gos)
+        {
+            HeroBase hb = go.GetComponent<HeroBase>();
+            if (hb != null)
+            {
+                if(hb.HeroType == HeroBase.HeroTypes.Tree)
+                {
+                    hb.SetSickness(CharacterSickness.None);
+                }
+            }
+        }
+
+        CheckWin();
+    }
+    
+    public void CheckWin()
+    {
+        print("Got to check win");
+        bool isWin = true;
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Caravan");
+        int heroCount = 0;
+        foreach (GameObject go in gos)
+        {
+            HeroBase hb = go.GetComponent<HeroBase>();
+            if (hb != null)
+            {
+                if(hb.StatusCurrent == CharacterStatus.Sick)
+                {
+                    
+                    isWin = false;
+                    break;
+                }
+                heroCount++;
+            }
+        }
+
+        if (isWin)
+        {
+            //Game Over
+            if(heroCount == 5)
+            {
+                uiOverlay.ShowGameOver("You Won!", "You saved everyone! Grats - that's a really tough thing to do.");
+            }
+            else
+            {
+                uiOverlay.ShowGameOver("You Won!", "Looks like you lost some people along the way though...you should try again!");
+            }
+            AudioManager.instance.PlaySound(SoundEffects.Win);
+        }
+    }
 
     public void SetSickness(CharacterSickness sickness)
     {
@@ -171,12 +231,13 @@ public class CharacterBase : SelectableBase
             case CharacterSickness.Water:
                 uiStatus.SicknessIcon.gameObject.SetActive(true);
                 uiStatus.SicknessIcon.color = Blue; //new Color(206, 255, 255); //aqua
-                StatusDescription = "<size=55%><color=#00CEFF>Genesis</color> produced a <color=#00CEFF>Magic Fruit</color>. Take it back west to heal an ally.</size>";
+                StatusDescription = "<size=55%><color=#00CEFF>Genesis</color> produced <color=#00CEFF>Magic Fruit</color>. Use it to heal an ally.</size>";
                 StatusCurrent = CharacterStatus.Attacking;
                 break;
             case CharacterSickness.None:
                 uiStatus.SicknessIcon.gameObject.SetActive(false);
                 StatusCurrent = CharacterStatus.Attacking;
+                StatusDescription = "";
                 break;
         }
     }
@@ -184,7 +245,8 @@ public class CharacterBase : SelectableBase
     public virtual void Move(Vector3 location)
     {
         if (StatusCurrent == CharacterStatus.Sick) return;
-        if (nma.isActiveAndEnabled)
+        //#FIX
+        if (nma.isActiveAndEnabled && nma.isOnNavMesh)
         {
             nma.isStopped = false;
             nma.SetDestination(location);

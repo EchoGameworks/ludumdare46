@@ -579,12 +579,12 @@ MonoBehaviour:
   StatusDescription: 
   StatusCurrent: 0
   SicknessLevel: 4
-  HealthMax: 30
+  HealthMax: 20
   HealthCurrent: 0
   AttackTimeMax: 2
-  MoveSpeedMax: 12
+  MoveSpeedMax: 14
   AccerlationMax: 6
-  AttackDamage: 4
+  AttackDamage: 3
   AttackDistance: 2
   TurnSpeed: 160
   attackSound: 8
@@ -606,8 +606,8 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2916001670376869567}
-  m_Enabled: 1
-  m_AgentTypeID: 0
+  m_Enabled: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -618,8 +618,8 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
+  m_BaseOffset: 0
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!135 &2916001670376869565
 SphereCollider:
@@ -1286,6 +1286,7 @@ MonoBehaviour:
   HealthBarCurrent: {fileID: 2916001670544280043}
   HealthBarLag: {fileID: 2916001670804077117}
   HeaderText: {fileID: 2916001670771876388}
+  ReviveButton: {fileID: 0}
   SicknessIcon: {fileID: 2916001669376674918}
   FillBackground: {fileID: 6864559363742922958}
   freezeLag: 0

@@ -312,6 +312,7 @@ MonoBehaviour:
   HealthBarCurrent: {fileID: 8449156751209121652}
   HealthBarLag: {fileID: 8449156750349252321}
   HeaderText: {fileID: 8449156751658467975}
+  ReviveButton: {fileID: 0}
   SicknessIcon: {fileID: 8449156751481029535}
   FillBackground: {fileID: 8449156750307738765}
   freezeLag: 0
@@ -491,8 +492,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8449156751635137060}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.3, y: 4.4, z: -301.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8449156751182785396}
@@ -530,14 +531,14 @@ MonoBehaviour:
   HealthMax: 200
   HealthCurrent: 0
   AttackTimeMax: 10
-  MoveSpeedMax: 10
+  MoveSpeedMax: 12
   AccerlationMax: 10
   AttackDamage: 1
   AttackDistance: 1
   TurnSpeed: 280
-  attackSound: 0
-  spawnSound: 0
-  deathSound: 0
+  attackSound: 20
+  spawnSound: 20
+  deathSound: 20
   AttackTarget: {fileID: 0}
   AttackTimeCurrent: 0
   nma: {fileID: 0}
@@ -550,8 +551,8 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8449156751635137060}
-  m_Enabled: 1
-  m_AgentTypeID: 0
+  m_Enabled: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -562,8 +563,8 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
+  m_BaseOffset: 0
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!135 &8449156751635137067
 SphereCollider:
@@ -1136,6 +1137,7 @@ GameObject:
   - component: {fileID: 8449156752345512678}
   - component: {fileID: 8449156752345512677}
   - component: {fileID: 8449156752345512676}
+  - component: {fileID: 4327304373536996224}
   m_Layer: 0
   m_Name: Attack Area
   m_TagString: Untagged
@@ -1187,6 +1189,18 @@ MonoBehaviour:
   AttackArea: {fileID: 8449156751762634126}
   AttackCollider: {fileID: 8449156752345512677}
   AttackableCharacters: []
+--- !u!114 &4327304373536996224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449156752345512679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca26e278507113f48a3bcdff141fe778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &177055466980371042
 PrefabInstance:
   m_ObjectHideFlags: 0

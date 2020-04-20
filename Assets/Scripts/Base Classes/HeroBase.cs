@@ -12,53 +12,84 @@ public class HeroBase : CharacterBase
     public Vector3 StartingPosition;
 
     private StageManager stageManager;
+    private float scoutTimer;
+    private float scoutTimerMax;
+    private bool isDead = false;
 
     protected override void Start()
     {
         base.Start();
         stageManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<StageManager>();
+        scoutTimerMax = 0.5f;
+        scoutTimer = scoutTimerMax;
     }
 
     private void Update()
     {
-        if(StatusCurrent == CharacterStatus.Attacking)
+        //if(StatusCurrent == CharacterStatus.Attacking)
+        //{
+        if (scoutTimer >= 0)
+        {
+            scoutTimer -= Time.deltaTime;
+        }
+        else
         {
             AttackTarget = Scout();
+            scoutTimer = scoutTimerMax;
         }
+            
+        //}
 
         if (AttackTarget != null)
         {
-            Attack(AttackTarget);
+            PrepareAttack();
+            //Attack(AttackTarget);
         }
     }
 
     public EnemyBase Scout()
     {
+        //print("scouting");
         EnemyBase target = null;
         List<EnemyBase> enemies = new List<EnemyBase>();
         foreach(CharacterBase cb in uiAttackArea.AttackableCharacters)
         {
-            EnemyBase eb = cb.GetComponent<EnemyBase>();
-            if (eb != null)
+            if(cb != null)
             {
-                enemies.Add(eb);
-            }
+                EnemyBase eb = cb.GetComponent<EnemyBase>();
+                if (eb != null)
+                {
+                    if (eb.HealthCurrent > 0)
+                    {
+                        enemies.Add(eb);
+                    }
 
-            
+                }
+            }
+         
         }
         if(enemies != null) 
         {
+            //print("enemy count: " + enemies.Count);
             if(enemies.Count > 0)
             {
                 target = enemies.OrderBy(t => (t.transform.position - this.transform.position).sqrMagnitude)
                 .FirstOrDefault();
             }
-            //else
-            //{
-            //    target = enemies[0];
-            //}
         }
 
+        List<HeroBase> heroes = new List<HeroBase>();
+        foreach (CharacterBase cb in uiAttackArea.AttackableCharacters)
+        {
+            if (cb != null)
+            {
+                HeroBase hb = cb.GetComponent<HeroBase>();
+                if (hb != null)
+                {
+                    heroes.Add(hb);
+                }
+            }
+        }
 
         return target;
     }
@@ -74,7 +105,11 @@ public class HeroBase : CharacterBase
         }
         else
         {
-            LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+            if (!isDead)
+            {
+                isDead = true;
+                LeanTween.scale(gameObject, Vector3.zero, 0.3f).setOnComplete(() => Destroy(gameObject));
+            }
         }
 
         
@@ -83,11 +118,13 @@ public class HeroBase : CharacterBase
     public override void Move(Vector3 location)
     {
         base.Move(location);
-        if(location != nma.steeringTarget)
+
+        //#FIX
+        if (location != nma.steeringTarget)
         {
             //print("sounding");
             AudioManager.instance.PlaySound(AudioManager.SoundEffects.Order);
         }
-        
+
     }
 }

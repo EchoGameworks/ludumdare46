@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static SpawnTrigger;
 
 public class TripInfo : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class TripInfo : MonoBehaviour
 
     public GameObject TestObject;
     public Transform TestPostitionTransform;
+
+    public SpawnTriggerTypes CurrentTrigger;
 
     public void Start()
     {
@@ -48,15 +51,28 @@ public class TripInfo : MonoBehaviour
         foreach (SpawnInfo si in CurrentStageInfo.Spawns)
         {
             int usedCount = Random.Range(si.MinNumber, si.MaxNumber);
-            for(int i = 1; i <= usedCount; i++)
+            for (int i = 1; i <= usedCount; i++)
             {
                 GameObject spawnGO = Instantiate(si.prefabEnemy, CharacterHolder, true);
-                spawnGO.GetComponent<NavMeshAgent>().enabled = false;
-                LeanTween.delayedCall(0.1f, () => spawnGO.GetComponent<NavMeshAgent>().enabled = true);
-                spawnGO.transform.position = RandomPointInBox(si.SpawnLocation.position, 1f);
-                spawnGO.transform.localScale = Vector3.zero;
-                LeanTween.scale(spawnGO, Vector3.one, 0.5f).setEaseInOutCirc();
+
+                Vector3 sourcePostion = si.SpawnLocation.position;
+                NavMeshHit closestHit;
+                if (NavMesh.SamplePosition(sourcePostion, out closestHit, 500, 1))
+                {
+                    spawnGO.transform.position = closestHit.position;
+                    //print("Closest Point " + spawnGO.name + " | " + closestHit.position);
+                    spawnGO.GetComponent<NavMeshAgent>().enabled = true;
+                    spawnGO.GetComponent<NavMeshAgent>().Warp(closestHit.position);
+                    spawnGO.transform.localScale = Vector3.zero;
+                    LeanTween.scale(spawnGO, Vector3.one, 0.5f).setEaseInOutCirc();
+                }
+                else
+                {
+                    Debug.Log("...");
+                }
             }
+
+
 
         }
     }
@@ -71,8 +87,10 @@ public class TripInfo : MonoBehaviour
     }
 
     public void NextStage()
-    {
+    {        
         CurrentStageNum++;
+        //print("===new stage==== - " + CurrentStageNum);
+
         GenerateStage(true);
     }
 }

@@ -17,19 +17,9 @@ public class UIOverlay : MonoBehaviour
 
     [Header("Gameover Banner")]
     public RectTransform GameOverBanner;
+    public TextMeshProUGUI GameoverText;
     public RectTransform GameOverUnderline;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SetTooltipText(string Title, string Description, string AddInfo)
     {
@@ -83,7 +73,7 @@ public class UIOverlay : MonoBehaviour
 
     public void ShowIntro()
     {
-        LeanTween.value(IntroBanner.gameObject, IntroBanner.anchoredPosition, new Vector2(260f, IntroBanner.anchoredPosition.y), 0.3f)
+        LeanTween.value(IntroBanner.gameObject, IntroBanner.anchoredPosition, new Vector2(280f, IntroBanner.anchoredPosition.y), 0.3f)
             .setEaseInOutCubic()
             .setDelay(0.3f)
             .setOnUpdate(
@@ -100,7 +90,7 @@ public class UIOverlay : MonoBehaviour
             }
         );
 
-        LeanTween.value(IntroUnderline.gameObject, IntroUnderline.anchoredPosition, new Vector2(245, IntroUnderline.anchoredPosition.y), 0.3f)
+        LeanTween.value(IntroUnderline.gameObject, IntroUnderline.anchoredPosition, new Vector2(265, IntroUnderline.anchoredPosition.y), 0.3f)
             .setEaseInOutCubic()
             .setDelay(0.5f)
             .setOnUpdate(
@@ -140,8 +130,14 @@ public class UIOverlay : MonoBehaviour
         );
     }
 
-    public void ShowGameOver()
+    public void ShowGameOver(string Title, string Description)
     {
+        GameoverText.text = "<size=120%><color=#00CEFF>" + Title + "</color></size><br><br><size=60%>" +
+                            Description + "<br><br>" +
+                            "Thanks for playing Valley of the Dying. This game was made during Ludum Dare 46 - a 48 hour, one-man game jam with the theme 'Keep it alive.' I hope you enjoyed playing!" +
+                            "<br><br>Drew of Echo Gameworks";
+
+
         LeanTween.value(GameOverBanner.gameObject, GameOverBanner.anchoredPosition, new Vector2(-663f, GameOverBanner.anchoredPosition.y), 0.3f)
             .setEaseInOutCubic()
             .setDelay(0.3f)

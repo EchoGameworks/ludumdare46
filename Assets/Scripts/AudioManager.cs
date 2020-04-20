@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
                                 Ravager_Spawn, Ravager_Attack, Ravager_Death,
                                 SandHunter_Spawn, SandHunter_Attack, SandHunter_Death,
                                 StartGame, Water, Revive,
+                                Upoe_Gun, Zolkam_Gun,
+                                Event, Win,
                                 None
     }
 
